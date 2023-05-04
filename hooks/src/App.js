@@ -3,6 +3,7 @@ import './App.css';
 import MovieList from './MovieList';
 import { useState } from 'react';
 import Search from './Search';
+import Add from './Add'
 
 function App() {
   const[keyword,setKeyword]=useState('')
@@ -55,14 +56,16 @@ function App() {
   const getRate=(rate)=>{
     setRating(rate)
   }
-  const addMovie=(movie)=>{
-    setMovies(movies.concat(movie))
+  const handleAdd = (newMovie)=>{
+    setMovies([...movies,newMovie]);
+  }
   return (
     <div className="App">
     <Search getData={getData} getRate={getRate}/>
-      <MovieList addMovie={addMovie} movies={movies.filter((el)=> el.rate >= rating && el.title.toLowerCase().includes(keyword.trim().toLocaleLowerCase()))} />
+    <Add handleAdd={handleAdd} />
+      <MovieList  movies={movies.filter((el)=> el.rate >= rating && el.title.toLowerCase().includes(keyword.trim().toLocaleLowerCase()))} />
     </div>
   );
-}}
+}
 
 export default App;
