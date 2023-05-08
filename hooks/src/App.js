@@ -4,6 +4,10 @@ import MovieList from './MovieList';
 import { useState } from 'react';
 import Search from './Search';
 import Add from './Add'
+import{Route, Routes,route} from 'react-router-dom'
+import Trailer from './Trailer';
+
+
 
 function App() {
   const[keyword,setKeyword]=useState('')
@@ -21,6 +25,7 @@ function App() {
       rate:5,
       genre:"action , romance",
       description:"Ghosted est un film réalisé par Dexter Fletcher avec Ana de Armas", 
+      trailer:"https://www.youtube.com/watch?v=IAdCsNtEuBU"
     },
 
     { id:2,
@@ -63,7 +68,13 @@ function App() {
     <div className="App">
     <Search getData={getData} getRate={getRate}/>
     <Add handleAdd={handleAdd} />
-      <MovieList  movies={movies.filter((el)=> el.rate >= rating && el.title.toLowerCase().includes(keyword.trim().toLocaleLowerCase()))} />
+
+    <Routes>
+    <Route path="/" element={<MovieList  movies={movies.filter((el)=> el.rate >= rating &&
+      el.title.toLowerCase().includes(keyword.trim().toLocaleLowerCase()))} />}/>
+      <Route path="/movie/:id" element={<Trailer movie={movies}/>}/>
+      
+    </Routes>
     </div>
   );
 }

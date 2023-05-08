@@ -1,5 +1,6 @@
 import React from 'react'
 import "./MovieCard.css"
+import {Link} from 'react-router-dom'
 import StarRatingComponent from 'react-star-rating-component';
 
 
@@ -22,10 +23,13 @@ const MovieCard = ({movie}) => {
           starCount={5}
           value={movie.rate}
         />
+        <Link to={`/movie/${movie.id}`}> trailer </Link>
       </div>
-
-      
     </div>
+
+    
+
+
     <div class="blur_back bright_back"></div>
   </div> 
   )
